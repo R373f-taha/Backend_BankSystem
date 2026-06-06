@@ -1,0 +1,167 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap');
+
+/* --- VARIABLES --- */
+:root {
+    /* Background Colors */
+    --primary-color: #CAFF33;
+    --bg-main: #1A1A1A;
+    --light-bg: #1C1C1C;
+    --lighter-bg: #262626;
+
+    /* Border Color */
+    --br-light: #262626;
+
+    /* Text Color */
+    --text-special: #CAFF33;
+    --text-white: #FFFFFF;
+    --text-light: #E4E4E7;
+    --text-description: #B3B3B3;
+    --text-sub: #4C4C4D;
+    --text-button-dark-: #1C1C1C;
+
+    /* Others */
+    --gradient: linear-gradient(180deg, rgba(202, 255, 51, 0.05) 0%, rgba(202, 255, 51, 0) 100%);
+    --transition: all 0.3s ease;
+}
+
+
+/* --- RESET --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: lexend;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-white);
+    font-family: "Lexend", sans-serif;
+    line-height: 1.5;
+}
+
+.MainTexture {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+}
+
+/* Custom Scrollbar: Neon Green & Dark Theme */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #caff00;
+    border-radius: 10px;
+    border: 2px solid #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #e1ff00;
+}
+
+input[type="submit"],
+button {
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+    color: var(--text-white);
+    transition: var(--transition);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* --- TYPOGRAPHY --- */
+h1 {
+    font-weight: 500;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+p {
+    color: var(--text-description);
+}
+
+
+a {
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+ul {
+    list-style: none;
+}
+
+/* --- LAYOUT & CONTAINERS --- */
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 162px;
+}
+
+.section-margin {
+    margin-top: 150px;
+}
+
+.bg-icon {
+    background: var(--gradient);
+}
+
+/* --- CLASSES --- */
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.row-reverse {
+    flex-direction: row-reverse;
+}
+
+.col-reverse {
+    flex-direction: column-reverse;
+}
+
+.border {
+    border: 1px solid var(--br-light);
+}
+
+span {
+    color: var(--text-special);
+}
+
+/* --- RESPONSIVE MEDIA --- */
+img {
+    max-width: 100%;
+    display: block;
+}

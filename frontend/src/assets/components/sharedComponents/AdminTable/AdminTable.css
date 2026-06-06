@@ -1,0 +1,333 @@
+/* ==========================================================================
+   🏦 AdminTable Component Styles 
+   ========================================================================== */
+
+
+.admin-dashboard-wrapper {
+    max-width: 1280px;
+    margin: 120px auto 80px; 
+    padding: 0 40px;
+    position: relative;
+    z-index: 1;
+}
+
+
+.admin-header {
+    margin-bottom: 48px;
+    padding-top: 48px;
+    position: relative;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(38, 38, 38, 0.5);
+}
+
+
+.admin-header h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color:#b6e62e;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+}
+
+
+.admin-header p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #B3B3B3; 
+}
+
+@media screen and (max-width: 1024px) {
+    .admin-dashboard-wrapper {
+        margin-top: 100px;
+        padding: 0 24px;
+    }
+    
+    .admin-header h1 {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .admin-dashboard-wrapper {
+        margin-top: 80px;
+        padding: 0 16px;
+    }
+    
+    .admin-header {
+        margin-bottom: 32px;
+        padding-bottom: 16px;
+        text-align: center; 
+    }
+    
+    .admin-header h1 {
+        font-size: 24px;
+    }
+    
+    .admin-header p {
+        font-size: 14px;
+    }
+}
+
+.table-container {
+    background: #1C1C1C;
+    border: 1px solid #262626;
+    border-radius: 16px;
+    overflow-x: auto; 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    margin-top: 20px;
+    width: 100%;
+}
+
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 15px;
+    min-width: 850px; 
+}
+
+
+.admin-table th {
+    background-color: #262626;
+    color: #E4E4E7;
+    padding: 20px 24px;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid #1A1A1A;
+}
+
+
+.admin-table td {
+    padding: 18px 24px;
+    border-bottom: 1px solid #262626;
+    color: #B3B3B3;
+    vertical-align: middle;
+    font-weight: 300;
+}
+
+
+.admin-table tbody tr {
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.admin-table tbody tr:hover {
+    background-color: rgba(202, 255, 51, 0.02); 
+}
+
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    text-transform: capitalize;
+    font-weight: 500;
+    display: inline-block;
+    text-align: center;
+}
+
+
+.badge.pending { 
+    background: rgba(255, 176, 32, 0.1); 
+    color: #FFB020; 
+    border: 1px solid rgba(255, 176, 32, 0.2);
+}
+
+.badge.success, 
+.badge.accepted, 
+.badge.approved { 
+    background: rgba(202, 255, 51, 0.1); 
+    color: #CAFF33; 
+    border: 1px solid rgba(202, 255, 51, 0.2);
+}
+
+
+.badge.rejected { 
+    background: rgba(255, 77, 77, 0.1); 
+    color: #FF4D4D; 
+    border: 1px solid rgba(255, 77, 77, 0.2);
+}
+
+
+.actions-cell {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+
+.btn-accept, 
+.btn-reject {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.btn-accept {
+    background: #CAFF33;
+    color: #1C1C1C;
+}
+
+.btn-accept:hover:not(:disabled) {
+    background: #b6e62e;
+    box-shadow: 0 0 15px rgba(202, 255, 51, 0.35);
+    transform: translateY(-1px);
+}
+
+
+.btn-reject {
+    border: 1px solid #262626;
+    background: transparent;
+    color: #FFFFFF;
+}
+
+.btn-reject:hover:not(:disabled) {
+    background: #FF4D4D;
+    border-color: #FF4D4D;
+    color: #FFFFFF;
+    box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+    transform: translateY(-1px);
+}
+
+
+.btn-accept:active:not(:disabled),
+.btn-reject:active:not(:disabled) {
+    transform: translateY(1px) scale(0.98);
+}
+
+
+button:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+/* ==========================================================================
+   ✨ Modern Neo-Dark Popup Styles (Glassmorphism)
+   ========================================================================== */
+
+/* الخلفية المغبشة خلف النافذة */
+.mh-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.7);
+    backdrop-filter: blur(8px); /* تأثير الغبش العصري */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* كرت النافذة المنبثقة */
+.mh-popup-card {
+    background: #1C1C1C;
+    border-radius: 20px;
+    padding: 32px;
+    width: 90%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* تغيير الـ Borders حسب نوع النتيجة لإضاءة نيون خفيفة */
+.mh-popup-card.success {
+    border: 1px solid rgba(202, 255, 51, 0.3);
+}
+.mh-popup-card.error {
+    border: 1px solid rgba(255, 77, 77, 0.3);
+}
+
+/* الأيقونات الدائرية */
+.popup-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.success .popup-icon {
+    background: rgba(202, 255, 51, 0.1);
+    color: #CAFF33;
+}
+
+.error .popup-icon {
+    background: rgba(255, 77, 77, 0.1);
+    color: #FF4D4D;
+}
+
+.mh-popup-card h3 {
+    font-size: 20px;
+    color: #FFFFFF;
+    margin-bottom: 12px;
+}
+
+.mh-popup-card p {
+    font-size: 14px;
+    color: #B3B3B3;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    word-break: break-word;
+}
+
+/* زر إغلاق البوب آب الفخم */
+.btn-close-popup {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    background: #262626;
+    color: #FFFFFF;
+    border: 1px solid #333333;
+    transition: all 0.2s ease;
+}
+
+.btn-close-popup:hover {
+    background: #FFFFFF;
+    color: #1A1A1A;
+    transform: translateY(-1px);
+}
+
+/* 🎬 تحريكات الأنيميشن لجعل الواجهة حية */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+@media screen and (max-width: 768px) {
+    .admin-table th, 
+    .admin-table td {
+        padding: 14px 16px;
+        font-size: 14px;
+    }
+    
+    .btn-accept, 
+    .btn-reject {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+}
