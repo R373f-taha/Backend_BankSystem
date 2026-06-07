@@ -31,15 +31,15 @@ class EmployeeService
                 !empty($filters['q']),
                 function ($mainQuery) use ($filters) {
                     $searchTerm = "%{$filters['q']}%";
-                    
+
                     $mainQuery->where(function ($subQuery) use ($searchTerm) {
                         $subQuery->whereHas('user', function ($u) use ($searchTerm) {
                             $u->where('name', 'like', $searchTerm)
-                              ->orWhere('email', 'like', $searchTerm);
+                                ->orWhere('email', 'like', $searchTerm);
                         })
-                        ->orWhereHas('accountRequest', function ($ar) use ($searchTerm) {
-                            $ar->where('identity_number', 'like', $searchTerm);
-                        });
+                            ->orWhereHas('accountRequest', function ($ar) use ($searchTerm) {
+                                $ar->where('identity_number', 'like', $searchTerm);
+                            });
                     });
                 }
             )
@@ -261,10 +261,10 @@ class EmployeeService
                 'address'           => $data['address'] ?? '',
                 'occupation'        => $data['occupation'] ?? 'Employee',
                 'deposit_amount'    => $data['balance'] ?? 0,
-                'status'            => 'accepted',         
+                'status'            => 'accepted',
                 'email'             => $data['email'],
                 'verified_at'       => now(),
-                'admin_id'          => auth()->id(),        
+                'admin_id'          => auth()->id(),
             ]);
 
             do {
@@ -273,7 +273,7 @@ class EmployeeService
 
             $customer = Customer::create([
                 'user_id'      => $user->id,
-                'email'        => $user->email, 
+                'email'        => $user->email,
                 'account_code' => $accountCode,
                 'balance'      => $data['balance'] ?? 0,
                 'status'       => 'active',
@@ -290,7 +290,6 @@ class EmployeeService
                     'customer'        => $customer,
                 ],
             ];
-
         } catch (Exception $e) {
             DB::rollBack();
 
@@ -299,5 +298,11 @@ class EmployeeService
                 'message' => 'Failed to create customer: ' . $e->getMessage(),
             ];
         }
+    }
+    public function getAllCustomers(): Collection
+    {
+        return Customer::with(['user', 'accountRequest'])
+            ->get()
+            ->map(fn($customer) => $this->formatCustomerSummary($customer));
     }
 }

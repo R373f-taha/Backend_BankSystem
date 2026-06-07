@@ -358,4 +358,15 @@ class EmployeeController extends Controller
 
         return response()->json($result, 201);
     }
+
+    public function showAllCustomers(): JsonResponse
+    {
+        $customers = $this->employeeService->getAllCustomers();
+
+        return response()->json([
+            'success' => true,
+            'data'    => $customers,
+            'count'   => $customers->count(),
+        ]);
+    }
 }
