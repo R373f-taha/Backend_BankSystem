@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WithdrawalController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\EmployeeController;
+
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -81,3 +83,37 @@ Route::middleware(['auth:sanctum', 'is_admin'])->prefix('admin')->group(function
     Route::put('/employees/{empId}', [AdminController::class, 'updateEmployee']);
     Route::delete('/employees/{employeeId}', [AdminController::class, 'removeEmployee']); 
 });
+
+
+// ==================== Employee Routes ====================
+
+Route::middleware(['auth:sanctum', 'is_employee'])->group(function () {
+    Route::prefix('employee')->group(function () {
+        // Pending approvals
+        Route::get('/pending-approvals', [EmployeeController::class, 'pendingApprovals']);
+        Route::get('/pending-transfers', [EmployeeController::class, 'pendingTransfers']);
+        Route::get('/pending-withdrawals', [EmployeeController::class, 'pendingWithdrawals']);
+
+        // Transfer approval
+        Route::post('/approve-transfer/{transfer}', [EmployeeController::class, 'approveTransfer']);
+        Route::post('/reject-transfer/{transfer}', [EmployeeController::class, 'rejectTransfer']);
+
+        // Withdrawal approval
+        Route::post('/approve-withdrawal/{transaction}', [EmployeeController::class, 'approveWithdrawal']);
+        Route::post('/reject-withdrawal/{transaction}', [EmployeeController::class, 'rejectWithdrawal']);
+
+        // Customer management
+        Route::get('/customers/search', [EmployeeController::class, 'searchCustomers']);
+        Route::get('/customers/{customer}', [EmployeeController::class, 'viewCustomer']);
+        Route::get('/customers/{customer}/transactions', [EmployeeController::class, 'customerTransactions']);
+        Route::get('/customers/{customer}/transfers', [EmployeeController::class, 'customerTransfers']);
+
+        // Account freezing/unfreezing
+        Route::post('customers/{customer}/freeze',  [EmployeeController::class, 'freezeAccount']);
+        Route::post('customers/{customer}/unfreeze', [EmployeeController::class, 'unfreezeAccount']);
+
+        // Create new customer (which creates an account request and auto-approves it)
+        Route::post('customers', [EmployeeController::class, 'createCustomer']);
+    });
+});
+

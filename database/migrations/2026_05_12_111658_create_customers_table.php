@@ -15,9 +15,15 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->unique();
             $table->string('email')->unique();
-            $table->enum('status', ['active','un_active'])->default('active');
+            $table->enum('status', ['active', 'un_active', 'frozen'])->default('active');
             $table->string('account_code')->unique();
             $table->decimal('balance', 15, 2)->default(0.00);
+            // Adding new fields for account freezing functionality
+            $table->timestamp('frozen_at')->nullable();
+            $table->string('frozen_reason')->nullable();
+            $table->timestamp('unfrozen_at')->nullable();
+            $table->string('unfrozen_reason')->nullable();
+            //...
             $table->timestamps();
             $table->softDeletes();
         });
