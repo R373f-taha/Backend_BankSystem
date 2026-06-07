@@ -30,7 +30,7 @@ class SendTransferNotification
         Notification::create([
          'user_id'=>$transfer->sender_id,
           'title'=>'Transfer Sent Successfully',
-          'message' => "Your transfer of $" . $transfer->amount. " to {$recieverName} has been completed successfully.",
+          'message' => "Your transfer of $" . $transfer->amount. " to {$recieverName->name} has been completed successfully.",
             'is_read' => false
         ]);
 
@@ -38,7 +38,7 @@ class SendTransferNotification
          Notification::create([
             'user_id' => $transfer->receiver_id,
             'title' => 'Transfer Received',
-            'message' => "You have received $" . $transfer->amount. " from {$senderName}.",
+            'message' => "You have received $" . $transfer->amount. " from {$senderName->name}.",
             'is_read' => false
         ]);
     }

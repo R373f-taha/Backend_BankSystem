@@ -35,5 +35,9 @@ class Customer extends Model
     {
         return $this->hasMany(Transfer::class, 'receiver_id');
     }
+        public function accountRequest()
+    {
+        return $this->hasOne(AccountRequest::class, 'email', 'email');
+    }
 
 }
