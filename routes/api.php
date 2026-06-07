@@ -114,6 +114,7 @@ Route::middleware(['auth:sanctum', 'is_employee'])->group(function () {
 
         // Create new customer (which creates an account request and auto-approves it)
         Route::post('customers', [EmployeeController::class, 'createCustomer']);
+        Route::get('all-customers', [EmployeeController::class, 'showAllCustomers']);
     });
 });
 
