@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/withdrawals', [WithdrawalController::class, 'store']);
     Route::post('/deposit', [TransactionController::class, 'deposit']);
     Route::get('/balance', [TransactionController::class, 'showBalance']);
-    Route::get('/statement', [TransactionController::class, 'accountStatement']);
+    Route::get('/transactions', [TransactionController::class, 'accountStatement']);
 });
 
 
@@ -81,7 +81,7 @@ Route::middleware(['auth:sanctum', 'is_admin'])->prefix('admin')->group(function
     Route::get('/employees', [AdminController::class, 'getAllEmployees']);
     Route::post('/employees', [AdminController::class, 'addEmployee']);
     Route::put('/employees/{empId}', [AdminController::class, 'updateEmployee']);
-    Route::delete('/employees/{employeeId}', [AdminController::class, 'removeEmployee']); 
+    Route::delete('/employees/{employeeId}', [AdminController::class, 'removeEmployee']);
 });
 
 

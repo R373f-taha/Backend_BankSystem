@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('rejection_reason')->nullable();
             //$table->renameColumn('type', 'transaction_type');
             //...
+         //    $table->timestamp('approval_requested_at')->nullable();
             $table->timestamp('transaction_date')->useCurrent();
             $table->foreignId('transfer_id')->nullable()->constrained('transfers', 'id')->onDelete('set null');
             $table->timestamps();
