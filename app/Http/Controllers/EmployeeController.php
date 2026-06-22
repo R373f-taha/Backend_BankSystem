@@ -263,10 +263,10 @@ class EmployeeController extends Controller
      * Get customer transactions
      * GET /api/employee/customers/{id}/transactions
      */
-    public function customerTransactions(CreateCustomerByEmployeeRequest $request, Customer $customer): JsonResponse
+    public function customerTransactions(Customer $customer): JsonResponse
     {
-        $limit = $request->input('limit', 500)->validated();
-        $transactions = $this->employeeService->getCustomerTransactions($customer, $limit);
+       // $limit = $request->input('limit', 500);
+        $transactions = $this->employeeService->getCustomerTransactions($customer, 500);
 
         return response()->json([
             'success' => true,

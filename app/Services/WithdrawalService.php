@@ -49,11 +49,11 @@ class WithdrawalService
                 'reference_number'   => 'TXN-' . strtoupper(Str::random(10)),
                 'customer_id'        => $customer->id,
                 'amount'             => $amount,
-                'transaction_type'   => 'withdrawal',
+                'type'   => 'withdrawal',
                 'description'        => 'Cash Withdrawal',
                 'status'             => $status,
                 'needs_approval'     => $needsApproval,
-                'approval_requested_at' => $needsApproval ? now() : null,
+                'approved_at' => $needsApproval ? now() : null,
             ]);
 
             // Only deduct balance if NOT needing approval

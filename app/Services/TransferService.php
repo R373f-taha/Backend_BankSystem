@@ -76,7 +76,7 @@ class TransferService
                 'status'          => $status,
                 'transfer_id'     => $transfer->id,
                 'needs_approval'  => $needsApproval,
-                'approval_requested_at' => $needsApproval ? now() : null,
+                'approved_at' => $needsApproval ? now() : null,
             ]);
 
             // Only deduct balance if NOT needing approval
