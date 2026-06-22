@@ -8,12 +8,16 @@ use App\Http\Controllers\TransferController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WithdrawalController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\EmployeeController;
 
+Route::get('/list-models', [ChatController::class, 'listAvailableModels']);
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('api.chat.send');
+
   Route::post('account/account-request', [AccountRequestController::class, 'create']);
 
 Route::middleware('auth:sanctum')->group(function () {
