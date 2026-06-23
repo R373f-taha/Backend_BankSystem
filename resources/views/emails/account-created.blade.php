@@ -36,12 +36,10 @@
             <p class="link-text">{{ $accountRequest->unique_link }}</p>
 
             <p style="text-align: center; margin-top: 25px;">
-                If you would like to view your appointment or reschedule it to another time that suits you better, please click the button below:
+                If you would like to view your appointment or reschedule it to another time that suits you better, please follow these steps:
+                    1) Go to our website and put your unique link provided above.
+                    2) Show your appointment details and reschedule it to another time that suits you better.
             </p>
-
-            <a href="http://localhost:5173/reschedule/{{ $accountRequest->unique_link }}" class="btn-action">
-                View & Reschedule Appointment
-            </a>
         </div>
         <div class="footer">
             <p>© {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
