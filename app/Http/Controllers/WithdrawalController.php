@@ -42,6 +42,26 @@ class WithdrawalController extends Controller
         ], $result['code']);
     }
 
+    public function confirmWithdrawal($withdrawalId)
+   {
+        $customer = Customer::where(
+            'user_id',
+            Auth::id()
+        )->firstOrFail();
+
+        $result = $this->withdrawalService
+            ->confirmWithdrawal(
+                $customer,
+                $withdrawalId,
+            );
+
+        return response()->json([
+            'success' => $result['success'],
+            'message' => $result['message'],
+            'data'    => $result['data'] ?? null,
+        ], $result['code']);
+    }
+
     /**
      * Display the specified resource.
      */

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
+use Illuminate\Database\Eloquent\Relations\HasOne;
 class AccountRequest extends Model
 {
     use \Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -31,4 +31,9 @@ class AccountRequest extends Model
     const STATUS_PENDING = 'pending';
     const STATUS_ACCEPTED = 'accepted';
     const STATUS_REJECTED = 'rejected';
+
+    public function appointment(): HasOne
+    {
+        return $this->hasOne(Appointment::class);
+    }
 }
