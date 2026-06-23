@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
 {
 
     protected $listen = [
+        \App\Events\AccountRequestCreatedEvent::class => [
+            \App\Listeners\SendAccountRequestCreatedEmail::class,
+        ],
         AccountRequestAcceptedEvent::class => [
             SendAccountRequestAcceptedEmail::class,
         ],
