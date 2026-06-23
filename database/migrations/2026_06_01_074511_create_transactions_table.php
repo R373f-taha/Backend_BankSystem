@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('type', ['credit', 'debit', 'withdrawal']);
             $table->string('description', 500)->nullable();
             //adding new fields for transaction status and approval process
-            $table->enum('status', ['pending', 'pending_approval', 'completed', 'failed', 'rejected'])
+            $table->enum('status', ['pending', 'pending_approval', 'completed', 'failed', 'rejected','confirmed'])
                 ->default('completed');
             $table->boolean('needs_approval')->default(false);
             $table->foreignId('approved_by')->nullable();

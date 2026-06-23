@@ -29,7 +29,7 @@ return new class extends Migration
             // Additional
             $table->string('email', 255)->nullable();
             $table->text('admin_notes')->nullable();
-         //   $table->string('unique_link', 64)->unique()->nullable();
+            $table->string('unique_link', 64)->unique()->nullable();
             $table->timestamp('verified_at')->nullable();
 
             $table->timestamps();

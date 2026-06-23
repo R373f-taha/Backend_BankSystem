@@ -25,7 +25,8 @@ class Transaction extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function transfer(){
+    public function transfer()
+    {
         return $this->belongsTo(Transfer::class);
     }
 
@@ -44,5 +45,9 @@ class Transaction extends Model
             'completed' => '✅ مكتمل',
         ];
         return $badges[$this->status] ?? '⚪not defined';
+    }
+    public function transferCompany()
+    {
+        return $this->belongsTo(TransferCompany::class, 'transfer_company_id');
     }
 }

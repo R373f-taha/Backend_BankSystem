@@ -318,5 +318,22 @@ public function updateEmployee(int $empId, array $data)
         ];
     }
 
+    public function getUserInfo(int $userId): array
+    {
+        $user = AccountRequest::find($userId);
 
+        if (!$user) {
+            return [
+                'success' => false,
+                'message' => 'User not found',
+                'code' => 404
+            ];
+        }
+
+        return [
+            'success' => true,
+            'message' => 'User information retrieved successfully',
+            'user' => $user
+        ];
+    }
 }

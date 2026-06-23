@@ -48,6 +48,20 @@
             letter-spacing: 8px;
             font-family: 'Courier New', monospace;
         }
+        /* تصميم الزر الجديد */
+        .btn-action {
+            display: block;
+            width: 220px;
+            margin: 25px auto;
+            text-align: center;
+            background: #764ba2;
+            color: white !important;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
         .info {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -80,10 +94,14 @@
                 </div>
             </div>
 
+            <p style="text-align: center; margin-top: 25px;">To choose or reschedule your interview appointment, please click the button below:</p>
+            <a href="http://localhost:3000/reschedule/{{ $accountRequest->unique_link }}" class="btn-action">
+                Choose Appointment
+            </a>
+
             <div class="info">
                 <strong>ℹ️ Important Information:</strong>
                 <ul>
-                    
                     <li>Use this code to complete your account verification</li>
                     <li>Keep this code secure and do not share it</li>
                 </ul>

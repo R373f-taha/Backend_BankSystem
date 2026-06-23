@@ -27,7 +27,8 @@ class WithdrawalRequest extends FormRequest
                 'required',
                 'numeric',
                 'min:0.01'
-            ]
+            ],
+            'transfer_company_id' => 'required|exists:transfer_companies,id',
         ];
     }
 }

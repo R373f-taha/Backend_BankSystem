@@ -5,6 +5,8 @@ namespace App\Services;
 use App\Events\AccountRequestAcceptedEvent;
 use App\Models\AccountRequest;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
+use App\Models\Appointment;
 
 class AccountRequestService
 {
@@ -13,9 +15,7 @@ class AccountRequestService
      */
     public function create(array $data): AccountRequest
     {
-        $data['unique_link']=Str::random(32);
-
-        return AccountRequest::create([
+        $accountRequest = AccountRequest::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'date_of_birth' => $data['date_of_birth'],
@@ -26,23 +26,39 @@ class AccountRequestService
             'occupation' => $data['occupation'],
             'deposit_amount' => $data['deposit_amount'],
             'status' => AccountRequest::STATUS_PENDING,
+            'unique_link' => Str::random(32),
         ]);
+
+        $availableAppointment = Appointment::where('status', 'available')
+            ->where('appointment_time', '>', Carbon::now())
+            ->orderBy('appointment_time', 'asc')
+            ->first();
+
+        if ($availableAppointment) {
+            $availableAppointment->update([
+                'account_request_id' => $accountRequest->id,
+                'status' => 'reserved'
+            ]);
+        }
+
+        return $accountRequest;
     }
 
-    public function acceptRequest(AccountRequest $accountRequest){
+    public function acceptRequest(AccountRequest $accountRequest)
+    {
 
-        $verificationCode=Str::random(8);
+        $verificationCode = Str::random(8);
 
         $accountRequest->update([
-              'status'=>'accepted',
-               'verification_code'=>$verificationCode,
-               'verified_at'=>null
+            'status' => 'accepted',
+            'verification_code' => $verificationCode,
+            'verified_at' => null
         ]);
-      AccountRequestAcceptedEvent::dispatch($accountRequest->fresh());
+        AccountRequestAcceptedEvent::dispatch($accountRequest->fresh());
         return $accountRequest->fresh();
     }
 
-     public function verify(array $data): array
+    public function verify(array $data): array
     {
         $accountRequest = AccountRequest::where('email', $data['email'])
             ->where('verification_code', $data['verification_code'])
@@ -110,24 +126,23 @@ class AccountRequestService
             ],
             'code' => 200
         ];
-
     }
 
-    public function rejectRequest(AccountRequest $accountRequest,?string $notes){
+    public function rejectRequest(AccountRequest $accountRequest, ?string $notes)
+    {
 
-      if ($accountRequest->status !== 'pending') {
+        if ($accountRequest->status !== 'pending') {
 
-       throw new \Exception('this request is '.$accountRequest->status.' so we cannot reject it 😑😒 ');
-    }
+            throw new \Exception('this request is ' . $accountRequest->status . ' so we cannot reject it 😑😒 ');
+        }
 
 
-     $accountRequest->update([
+        $accountRequest->update([
             'status' => 'rejected',
             'admin_notes' => $notes,
             'verification_code' => null,
         ]);
 
-     return $accountRequest->fresh();
-
+        return $accountRequest->fresh();
     }
 }

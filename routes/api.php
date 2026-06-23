@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\AppointmentController;
 
 Route::get('/list-models', [ChatController::class, 'listAvailableModels']);
 
@@ -66,9 +67,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/deposit', [TransactionController::class, 'deposit']);
     Route::get('/balance', [TransactionController::class, 'showBalance']);
     Route::get('/transactions', [TransactionController::class, 'accountStatement']);
+    Route::post('/withdrawals/{withdrawalId}/confirm', [WithdrawalController::class, 'confirmWithdrawal']);
 });
 
-
+Route::prefix('account-requests/{unique_link}')->group(function () {
+    Route::get('/appointments', [AppointmentController::class, 'index']);
+    Route::post('/appointments/reschedule', [AppointmentController::class, 'reschedule']);
+});
 
 Route::middleware(['auth:sanctum', 'is_admin'])->prefix('admin')->group(function () {
 
@@ -77,6 +82,7 @@ Route::middleware(['auth:sanctum', 'is_admin'])->prefix('admin')->group(function
     Route::get('/users', [AdminController::class, 'getAllUsers']);
     Route::put('/users/{userId}', [AdminController::class, 'editUser']);
     Route::delete('/users/{userId}', [AdminController::class, 'removeUser']);
+    Route::get('/users/{userId}', [AdminController::class, 'getUserInfo']);
 
     Route::get('/customers/active', [AdminController::class, 'getActiveCustomers']);
     Route::get('/customers/unActive', [AdminController::class, 'getUnActiveCustomers']);
