@@ -40,6 +40,8 @@ class AccountRequestService
                 'status' => 'reserved'
             ]);
         }
+        $accountRequest->load('appointment');
+        \App\Events\AccountRequestCreatedEvent::dispatch($accountRequest);
 
         return $accountRequest;
     }
