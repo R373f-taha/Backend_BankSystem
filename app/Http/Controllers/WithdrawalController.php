@@ -16,7 +16,20 @@ class WithdrawalController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::where(
+            'user_id',
+            Auth::id()
+        )->firstOrFail();
+
+        $withdrawals = $customer->transactions()
+            ->where('type', 'withdrawal')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json([
+            'success' => true,
+            'data'    => $withdrawals,
+        ]);
     }
 
     /**
