@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/balance', [TransactionController::class, 'showBalance']);
     Route::get('/transactions', [TransactionController::class, 'accountStatement']);
     Route::post('/withdrawals/{withdrawalId}/confirm', [WithdrawalController::class, 'confirmWithdrawal']);
+    Route::get('/withdrawals', [WithdrawalController::class, 'index']);
 });
 
 Route::prefix('account-requests/{unique_link}')->group(function () {
